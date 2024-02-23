@@ -1,0 +1,74 @@
+$fontColor: #2fd5ff;
+.flex-layout {
+  display: flex;
+  padding: 10px 0;
+  .base-button:last-child {
+    margin-left: 30px;
+  }
+}
+.f-pt-30 {
+  display: flex;
+  .camera-canvas {
+    color: #fff;
+    min-width: 50px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+    .camera-info {
+      display: flex;
+      text-align: center;
+      &-label {
+        min-width: 70px;
+        font-size: 12px;
+        white-space: nowrap;
+        padding-right: 10px;
+      }
+      &-value {
+        font-size: 12px;
+      }
+    }
+  }
+  .no-data {
+    color: #fff;
+    font-size: 14px;
+  }
+}
+.f-center {
+  width: 300px;
+  margin: auto;
+  justify-content: center;
+}
+
+::v-deep {
+  .el-form-item__label {
+    padding-right: 20px;
+    color: #fff;
+  }
+  .el-select {
+    width: 100%;
+    & .el-input__inner {
+      border: 1px solid rgb(44, 95, 172);
+      background-color: rgba(0, 204, 255, 0.122);
+      color: #fff;
+      &::placeholder {
+        color: #19789f;
+        font-size: 14px;
+      }
+    }
+  }
+  .el-textarea__inner {
+    background-color: rgba(0, 204, 255, 0.122);
+    border: 1px solid rgb(44, 95, 172);
+    color: $fontColor;
+    &::placeholder {
+      color: rgba(47, 213, 255, 0.5);
+      font-size: 15px;
+    }
+  }
+}
+
+// ::v-deep {
+//   .el-form-item--mini.el-form-item, .el-form-item--small.el-form-item {
+//     margin-bottom: 12px;
+//   }
+// }

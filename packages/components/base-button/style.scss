@@ -1,0 +1,78 @@
+@import "../../assets/style/common/common.scss";
+@mixin cf-b0 {
+  color: #fff;
+  border: 0;
+}
+.base-button {
+  position: relative;
+  cursor: pointer;
+  @extend .base-button--mixin;
+  > i {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
+  }
+  &.loading {
+    cursor: wait;
+  }
+  // > .loading {
+  //   position: absolute;
+  //   right: 5px;
+  // }
+  &-table {
+    border: 1px solid rgb(7, 101, 140);
+    background-color: rgba(1, 169, 239, 0.102);
+    color: rgb(1, 169, 239);
+    font-size: 12px;
+    padding: 0 6px;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    &:active {
+      background-color: rgba(1, 169, 239, 0);
+      color: #fff;
+    }
+  }
+  &-form {
+    height: 28px;
+    font-size: 13px;
+    padding: 0 38px;
+    border: 0;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  &.color-c34325 {
+    background-color: #c34325;
+    @include cf-b0();
+    &:active {
+      background-color: rgba(195, 67, 37, 0.8);
+    }
+  }
+  &.color-3f941b {
+    background-color: #3f941b;
+    @include cf-b0();
+    &:active {
+      background-color: rgba(63, 148, 27, 0.8);
+    }
+  }
+  &.color-5f5f5f5f {
+    background-color: #5f5f5f5f;
+    @include cf-b0();
+    &:active {
+      background-color: rgba(95, 95, 95, 0.8);
+    }
+  }
+  &.color-transparent-not {
+    background: transparent;
+    border-color: #5f5f5f;
+    color: #9a9a9a;
+    cursor: no-drop;
+    &:active {
+      background-color: rgba(1, 169, 239, 0);
+    }
+  }
+}

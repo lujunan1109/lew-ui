@@ -1,0 +1,25 @@
+.base-button {
+  .el-input {
+    &:active {
+      background-color: rgba(0, 204, 255, 0.2);
+    }
+  }
+
+  .el-input__inner {
+    height: 30px;
+    line-height: 28px;
+    border-radius: 2px;
+    border: unset;
+    background-color: unset;
+    color: #2fd5ff;
+    padding: 0 4px;
+    font-size: 15px;
+    &::placeholder {
+      color: rgba(47, 213, 255, 0.5);
+    }
+    &:active {
+      border-color: rgba(0, 204, 255, 0.2);
+      background-color: rgba(0, 204, 255, 0.122);
+    }
+  }
+}

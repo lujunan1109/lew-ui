@@ -1,0 +1,112 @@
+@import "../../assets/style/common/common.scss";
+.v-modal {
+  // background-color: transparent;
+  pointer-events: none;
+}
+.baseDialog {
+  border: 2px solid rgb(43, 67, 133);
+  background-color: rgba(9, 22, 59, 0.902);
+  color: #1cc8f7;
+  margin: 0 auto 30px;
+  > .el-dialog {
+    position: relative;
+    &__header {
+      background-color: rgba(9, 22, 59, 0.902);
+      padding: 0 24px 0 30px;
+      height: 60px;
+      line-height: 58px;
+      border-bottom: 2px solid rgb(43, 67, 133);
+      .mr15 {
+        margin-right: 15px;
+      }
+      > .baseDialog__title {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .before {
+          @include center();
+          background: url('../../assets/images/submenu-icon.png') no-repeat;
+          background-size: 100% 100%;
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          margin-right: 10px;
+        }
+        .title {
+          position: relative;
+          @include warp();
+          color: #1cc8f7;
+          font-size: 23px;
+          font-weight: bold;
+          @include warp();
+        }
+        > .subtitle {
+          position: relative;
+          height: 46px;
+          display: flex;
+          margin-left: 30px;
+          font-size: 15px;
+          color: #fff;
+          flex: 1;
+          overflow: hidden;
+          margin-right: 15px;
+          padding-left: 7px;
+          align-items: center;
+          @include table-scroll();
+          span {
+            position: relative;
+            display: inline-block;
+            height: 32px;
+            line-height: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+            flex-shrink: 0;
+            em {
+              position: relative;
+              z-index: 5;
+              margin: 0 22px;
+            }
+            .el-badge__content {
+              border: 0;
+            }
+            &::before {
+              content: '';
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 204, 255, 0.169);
+              transform: skew(-15deg);
+            }
+            &:not(:last-child) {
+              margin-right: 2px;
+            }
+            &.active {
+              &::before {
+                background-color: rgb(29, 203, 247);
+              }
+              color: #0a163a;
+            }
+          }
+        }
+      }
+      > .el-dialog__headerbtn {
+        top: 20px;
+        > i {
+          background: url('../../assets/images/close.png') no-repeat;
+          background-size: cover;
+          width: 16px;
+          height: 16px;
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+    &__body {
+      padding: 34px 30px 28px;
+    }
+    // &__footer {
+    // }
+  }
+}

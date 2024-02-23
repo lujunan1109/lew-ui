@@ -1,0 +1,497 @@
+@mixin mask($bgColor:rgba(0, 0, 0, .6)) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $bgColor;
+  overflow: auto;
+  z-index: 9999;
+}
+
+// 清除浮动
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// 不换行
+@mixin autoWrap {
+  word-break: keep-all;
+  word-wrap: break-word; // 只对英文起作用，以单词作为换行依据。
+  white-space: pre-wrap; //只对中文起作用，强制换行。
+  text-align: justify; //css英文语句的两端对齐：
+}
+
+// 自动换行
+@mixin warp($num: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+  overflow: hidden;
+}
+
+// 不能选中
+@mixin noSelect {
+  user-select: none;
+}
+
+@mixin disabled {
+  cursor: no-drop;
+  color: #fff;
+  border-color: #fff;
+  opacity: 0.3;
+}
+
+.base-button--mixin {
+  border: 1px solid rgb(44, 95, 172);
+  padding: 0 6px;
+  height: 30px;
+  line-height: 28px;
+  background-color: rgba(0, 204, 255, 0.122);
+  border-radius: 2px;
+  font-size: 15px;
+  color: #2fd5ff;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  @include noSelect();
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+  &:active {
+    background-color: #1dcbf7;
+    color: #09153a;
+  }
+  &.disabled {
+    @include disabled;
+  }
+  &.is-disabled {
+    @include disabled;
+  }
+}
+
+@mixin input {
+  height: 30px;
+  line-height: 28px;
+  border: 1px solid rgb(44, 95, 172);
+  border-radius: 2px;
+  background-color: rgba(0, 204, 255, 0.122);
+  color: #2fd5ff;
+  padding: 0 4px;
+  font-size: 15px;
+  &::placeholder {
+    color: rgba(47, 213, 255, 0.5);
+  }
+}
+
+@mixin select-popper {
+  background: #092e56 !important;
+  // border-color: #092e56;
+  border: 0 !important;
+  &.el-select-dropdown {
+    &.is-multiple {
+      .el-select-dropdown__item {
+        background-color: rgb(9,46,86);
+        color: #fff;
+        &.hover {
+          background-color: #0d3969;
+        }
+        &.selected {
+          color: #2fd5ff;
+          background-color: #0d3969;
+          font-weight: normal;
+          &.hover {
+            background-color: #0d3969;
+          }
+        }
+      }
+    }
+  }
+  .el-select-dropdown__item {
+    background-color: rgb(9,46,86);
+    color: #fff;
+    &.hover {
+      background-color: #0d3969;
+    }
+    &.selected {
+      color: #2fd5ff;
+      background-color: #0d3969;
+      font-weight: normal;
+      &.hover {
+        background-color: #0d3969;
+      }
+    }
+    &.is-disabled {
+      color: #666;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .popper__arrow {
+    border-bottom-color: #092e56 !important;
+    &::after {
+      border-bottom-color: #092e56 !important;
+    }
+  }
+}
+
+@mixin date {
+  $fontColor: #2fd5ff;
+  $backgroundColor: #092e56;
+  $borderColor: #1c5ca3;
+  .el-input__prefix {
+    left: auto;
+    right: 0;
+    border-left: 1px solid #2c5fac;
+    width: 15px;
+    height: 100%;
+    i {
+      position: relative;
+      width: 15px;
+      display: inline-block;
+      transition: all 0.3s;
+      transform: rotate(-180deg);
+      cursor: pointer;
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        content: "";
+        background: url("../../assets/images/arrow.png") no-repeat;
+        background-size: cover;
+        height: 4px;
+        width: 7px;
+      }
+    }
+  }
+  &.isSelect i {
+    transform: rotate(0deg);
+  }
+  .el-input__suffix {
+    right: 10px !important;
+  }
+  &.el-input__inner {
+    background-color: rgba(0, 204, 255, 0.122);
+    border-color: rgba(0, 204, 255, 0.122);
+    color: $fontColor;
+    &.el-date-editor--datetimerange {
+      i:first-child {
+        display: none;
+      }
+      .el-range-separator {
+        color: $fontColor;
+      }
+      .el-range-input {
+        width: 44%;
+        background: none;
+        color: $fontColor;
+        font-size: 15px;
+        &::placeholder {
+          color: rgba(47, 213, 255, 0.5);
+        }
+      }
+    }
+  }
+  > .el-range-separator {
+    color: $fontColor;
+  }
+  > .el-range-input {
+    color: $fontColor;
+    background: transparent;
+    font-size: 14px;
+    &::placeholder {
+      color: rgba(0, 173, 245, 0.6);
+    }
+  }
+}
+
+@mixin date-popper {
+  $fontColor: #2fd5ff;
+  $backgroundColor: #092e56;
+  $borderColor: #1c5ca3;
+  background-color: $backgroundColor;
+  border-color: $backgroundColor;
+  color: #fff;
+  .el-picker-panel {
+    &__body {
+      .el-date-picker__time-header,
+      .el-date-range-picker__time-header {
+        border-bottom-color: $borderColor;
+      }
+      .is-left {
+        border-right-color: $borderColor;
+      }
+      .el-input__inner {
+        background-color: rgba(0, 204, 255, 0.122);
+        color: $fontColor;
+        border-color: rgba(0, 204, 255, 0.122);
+        &::placeholder {
+          color: rgba(47, 213, 255, 0.5);
+        }
+        &.is-disable {
+          background-color: #6a6f75;
+          border-color: currentColor;
+        }
+      }
+      .el-time-panel {
+        background-color: $backgroundColor;
+        border-color: $borderColor;
+        .el-time-spinner__item {
+          color: #fff;
+          &.active {
+            color: $fontColor;
+          }
+          &:not(.active):hover {
+            background-color: #0d3969;
+          }
+        }
+        &__content::before,
+        &__content::after {
+          border-color: $borderColor;
+        }
+        &__footer {
+          border-top-color: $borderColor;
+          button {
+            @extend .base-button--mixin;
+          }
+        }
+      }
+      .el-date-table {
+        td.in-range div,
+        td.in-range div:hover,
+        &.is-week-mode .el-date-table__row.current div,
+        &.is-week-mode .el-date-table__row:hover div {
+          background-color: #1d4178;
+        }
+      }
+    }
+    &__icon-btn {
+      color: #fff;
+    }
+    &__footer {
+      background-color: $backgroundColor;
+      border-top-color: $borderColor;
+      .el-button {
+        @extend .base-button--mixin;
+      }
+    }
+  }
+  .el-date-picker__header-label,
+  .cell,
+  .el-date-table th {
+    color: #fff !important;
+  }
+  th {
+    border-bottom-color: $borderColor;
+  }
+  td.current:not(.disabled) span {
+    color: $fontColor;
+    background-color: #0d3969;
+  }
+  .popper__arrow {
+    border-bottom-color: $backgroundColor !important;
+    &::after {
+      border-bottom-color: $backgroundColor !important;
+    }
+  }
+}
+
+@mixin form-time-popper {
+  $fontColor: #2fd5ff;
+  $backgroundColor: #092e56;
+  $borderColor: #1c5ca3;
+  background-color: $backgroundColor;
+  border-color: $backgroundColor;
+  color: #fff;
+  .el-time {
+    &-range-picker__content {
+      .el-time-range-picker {
+        &__body {
+          border-color: $borderColor;
+          .el-time-spinner {
+            &__list {
+              &::after,
+              &::before {
+                height: 72px;
+              }
+            }
+            &__item {
+              color: #fff;
+              transition: all 0.15s;
+              &:hover:not(.disabled):not(.active) {
+                color: currentColor;
+                background: #16416f;
+              }
+              &.active {
+                color: $fontColor;
+              }
+            }
+          }
+        }
+      }
+    }
+    &-panel__content {
+      &::after,
+      &::before {
+        border-color: $borderColor;
+      }
+    }
+    &-panel__footer {
+      height: auto;
+      border-top-color: $borderColor;
+      .el-time-panel__btn {
+        @extend .base-button--mixin;
+        font-weight: normal;
+      }
+    }
+  }
+  .popper__arrow {
+    border-bottom-color: $backgroundColor !important;
+    &::after {
+      border-bottom-color: $backgroundColor !important;
+    }
+  }
+}
+
+@mixin baseCascader-popper {
+  $fontColor: #2fd5ff;
+  $backgroundColor: #092e56;
+  $borderColor: #1c5ca3;
+  background-color: $backgroundColor;
+  border-color: $backgroundColor;
+  color: #fff;
+  .el-cascader {
+    &-menu {
+      color: $fontColor;
+      .el-radio__input.is-disabled .el-radio__inner,
+      .el-radio__input.is-disabled.is-checked .el-radio__inner {
+        background: #797e94;
+        border-color: #797e94;
+      }
+    }
+    &-node {
+      &:not(.is-disabled):focus,
+      &:not(.is-disabled):hover {
+        background: #16416f;
+      }
+    }
+  }
+  .popper__arrow {
+    border-bottom-color: $backgroundColor !important;
+    &::after {
+      border-bottom-color: $backgroundColor !important;
+    }
+  }
+}
+
+@mixin dialog-layout-top-btm--mixin {
+  display: flex;
+  flex-direction: column;
+  padding: 0 22px 20px !important;
+  .dialog-table {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+
+@mixin dialog-layout-top-btm-p0--mixin {
+  display: flex;
+  flex-direction: column;
+  .dialog-table {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+
+@mixin table-scroll {
+  .ps__rail-y {
+    background-color: rgba(29, 203, 247, 0.15);
+    opacity: 1;
+    width: 6px;
+    .ps__thumb-y {
+      background-color: rgb(29, 203, 247);
+      right: 0;
+      width: 6px;
+    }
+  }
+  .ps__rail-x {
+    background-color: rgba(29, 203, 247, 0.15);
+    opacity: 1;
+    height: 4px;
+    .ps__thumb-x {
+      background-color: rgb(29, 203, 247);
+      right: 0;
+      height: 4px;
+      bottom: 0;
+    }
+  }
+}
+
+@mixin tree--mixin {
+  background: transparent;
+  color: #cddfe6;
+  &-node {
+    &:focus > .el-tree-node__content {
+      background-color: #31427a;
+      color: #00b4ff;
+    }
+    &__content {
+      &:hover {
+        background-color: #31427a;
+        color: #00b4ff;
+      }
+      .el-checkbox__input {
+        .el-checkbox__inner {
+          background: #183f6f;
+          border-color: #2c5fac;
+        }
+        &.is-disabled .el-checkbox__inner {
+          background-color: #5c5c5d;
+          border-color: #2c5fac;
+          cursor: not-allowed;
+        }
+      }
+    }
+    &__expand-icon {
+      color: #01adf7;
+      &.is-leaf {
+        color: transparent;
+      }
+      &.expanded {
+        transform: rotate(45deg);
+      }
+    }
+    &.is-current > .el-tree-node__content {
+      background-color: #31427a;
+    }
+  }
+  &--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+    background-color: #31427a;
+  }
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin center-x {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin center-y {
+  display: flex;
+  align-items: center;
+}
